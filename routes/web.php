@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('test', function (Request $request) {
+    event(new App\Broadcasting\OrderChannel(10));
+});

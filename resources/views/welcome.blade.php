@@ -128,5 +128,12 @@
                 </div>
             </div>
         </div>
+        <script src="{{ asset('/js/app.js') }}"></script>
+        <script>
+            Echo.channel('orders')
+                .listen('.updated', (e) => {
+                    console.log(e);
+                });
+        </script>
     </body>
 </html>
