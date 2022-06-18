@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,12 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::view('/', 'welcome');
+
+Route::group([
+    'middleware' => ['auth'],
+], function () {
+    Route::view('/dashboard', 'dashboard')->name('dashboard');
+    Route::resource('users', UserController::class)->except(['show'])->middleware('can:manage users');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
