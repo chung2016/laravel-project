@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -25,7 +26,7 @@ Route::group([
 ], function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
     Route::resource('users', UserController::class)->except(['show'])->middleware('can:manage users');
-
+    Route::resource('clients', ClientController::class)->except(['show']);
     Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::post('profile', [ProfileController::class, 'update'])->name('profile.update');
 });

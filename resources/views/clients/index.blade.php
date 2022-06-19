@@ -2,10 +2,10 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('All Users') }}
+                {{ __('All Clients') }}
             </h2>
-            <a href="{{ route('users.create') }}"
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-1">Add New User</a>
+            <a href="{{ route('clients.create') }}"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-1">Add New Client</a>
         </div>
     </x-slot>
     <div class="flex flex-col">
@@ -24,10 +24,13 @@
                             Email
                         </th>
                         <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                            {{ __('Role') }}
+                            Phone
                         </th>
                         <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                            Clients
+                            Address
+                        </th>
+                        <th scope="col" class="text-sm font-medium text-white px-6 py-4">
+                            Company Name
                         </th>
                         <th scope="col" class="text-sm font-medium text-white px-6 py-4">
                             Actions
@@ -35,29 +38,32 @@
                     </tr>
                 </thead class="border-b">
                 <tbody>
-                    @foreach ($users as $user)
+                    @foreach ($clients as $client)
                         <tr>
                             <td class="px-6 py-4 whitespace-no-wrap">
-                                {{ $user->id }}
+                                {{ $client->id }}
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap">
-                                {{ $user->name }}
+                                {{ $client->name }}
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap">
-                                {{ $user->email }}
+                                {{ $client->email }}
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap">
-                                {{ $user->getRoleNames()->implode(', ') }}
+                                {{ $client->phone }}
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap">
-                                {{ $user->clients_count }}
+                                {{ $client->address }}
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap">
-                                <a href="{{ route('users.edit', $user) }}"
+                                {{ $client->company_name }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-no-wrap">
+                                <a href="{{ route('clients.edit', $client) }}"
                                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-1">
                                     {{ __('Edit') }}
                                 </a>
-                                <form action="{{ route('users.destroy', $user) }}" method="POST"
+                                <form action="{{ route('clients.destroy', $client) }}" method="POST"
                                     class="inline-block">
                                     @csrf
                                     @method('DELETE')

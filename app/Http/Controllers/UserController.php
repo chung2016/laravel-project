@@ -13,7 +13,7 @@ class UserController extends Controller
 {
     public function index(): View
     {
-        $users = User::with('roles')->get();
+        $users = User::with('roles')->withCount(['clients'])->get();
         return view('users.index', compact('users'));
     }
 

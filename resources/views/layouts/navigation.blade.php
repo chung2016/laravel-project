@@ -20,6 +20,9 @@
                             {{ __('Users') }}
                         </x-nav-link>
                     @endcan
+                    <x-nav-link :href="route('clients.index')" :active="request()->routeIs('clients.index')">
+                        {{ __('Clients') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -87,6 +90,9 @@
                     {{ __('Users') }}
                 </x-responsive-nav-link>
             @endcan
+            <x-responsive-nav-link :href="route('clients.index')" :active="request()->routeIs('clients.index')">
+                {{ __('Clients') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
