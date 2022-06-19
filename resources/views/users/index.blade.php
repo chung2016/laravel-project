@@ -10,6 +10,7 @@
     </x-slot>
     <div class="flex flex-col">
         <div class="overflow-hidden">
+            <x-success-message />
             <table class="w-full text-center">
                 <thead class="border-b bg-gray-800">
                     <tr>
