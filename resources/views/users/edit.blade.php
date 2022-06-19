@@ -16,31 +16,28 @@
                 @csrf
                 @method('PUT')
                 <div class="flex flex-col mb-1">
-                    <label for="name" class="block text-gray-700 text-sm font-bold mb-2">
-                        {{ __('Name') }}
-                    </label>
-                    <input id="name" type="text" name="name"
-                        class="shadow bg-gray-400 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('name') border-red-500 @enderror"
-                        value="{{ $user->name }}" autocomplete="name" disabled>
+                    <x-label for="name" :value="__('Name')" />
+                    <x-input name="name" :value="$user->name" id="name" />
+                    @error('name')
+                        <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="flex flex-col mb-1">
-                    <label for="email" class="block text-gray-700 text-sm font-bold mb-2">
-                        {{ __('Email') }}
-                    </label>
-                    <input id="email" type="email" name="email"
-                        class="shadow bg-gray-400 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('email') border-red-500 @enderror"
-                        value="{{ $user->email }}" autocomplete="email" disabled>
+                    <x-label for="email" :value="__('Email')" />
+                    <x-input name="email" :value="$user->email" id="email" disabled />
+                    @error('email')
+                        <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="flex flex-col mb-1">
-                    <label for="role" class="block text-gray-700 text-sm font-bold mb-2">
-                        {{ __('Role') }}
-                    </label>
+                    <x-label for="role" :value="__('Role')" />
                     <select name="role" id="role"
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('role') border-red-500 @enderror">
                         <option value="">Select Role</option>
                         @foreach ($roles as $role)
-                            <option value="{{ $role->id }}" {{ $user->hasRole($role->name) ? 'selected' : '' }}>{{ $role->name }}</option>
+                            <option value="{{ $role->id }}" {{ $user->hasRole($role->name) ? 'selected' : '' }}>
+                                {{ $role->name }}</option>
                         @endforeach
                     </select>
                     @error('role')
