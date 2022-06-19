@@ -1,5 +1,12 @@
 # Laravel Project
 
+# Installation
+
+- `composer install`
+- `cp .env.example .env`
+- `php artisan migrate:refresh --seed`
+- `php artisan serve`
+
 ## Features to implement
 
 ### Routing Advanced
