@@ -12,7 +12,7 @@ class ClientController extends Controller
 {
     public function index(): View
     {
-        $clients = Client::all();
+        $clients = Client::withCount('projects')->get();
         return view('clients.index', compact('clients'));
     }
 

@@ -2,10 +2,10 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('All Clients') }}
+                {{ __('Client') . ' Name: ' . $client->name . ' | ' . __('All Projects') }}
             </h2>
-            <a href="{{ route('clients.create') }}"
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-1">Add New Client</a>
+            <a href="{{ route('clients.projects.create', $client) }}"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-1">Add New Project</a>
         </div>
     </x-slot>
     <div class="flex flex-col">
@@ -21,19 +21,10 @@
                             {{ __('Name') }}
                         </th>
                         <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                            Email
+                            {{ __('Description') }}
                         </th>
                         <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                            Phone
-                        </th>
-                        <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                            Address
-                        </th>
-                        <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                            Company Name
-                        </th>
-                        <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                            Projects
+                            {{ __('Tasks') }}
                         </th>
                         <th scope="col" class="text-sm font-medium text-white px-6 py-4">
                             Actions
@@ -41,40 +32,27 @@
                     </tr>
                 </thead class="border-b">
                 <tbody>
-                    @foreach ($clients as $client)
+                    @foreach ($projects as $project)
                         <tr>
                             <td class="px-6 py-4 whitespace-no-wrap">
-                                {{ $client->id }}
+                                {{ $project->id }}
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap">
-                                {{ $client->name }}
+                                {{ $project->name }}
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap">
-                                {{ $client->email }}
+                                {{ $project->description }}
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap">
-                                {{ $client->phone }}
+                                {{ $project->tasks_count }}
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap">
-                                {{ $client->address }}
-                            </td>
-                            <td class="px-6 py-4 whitespace-no-wrap">
-                                {{ $client->company_name }}
-                            </td>
-                            <td class="px-6 py-4 whitespace-no-wrap">
-                                {{ $client->projects_count }}
-                            </td>
-                            <td class="px-6 py-4 whitespace-no-wrap">
-                                <a href="{{ route('clients.projects.index', $client) }}"
-                                    class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-1">
-                                    View Projects
-                                </a>
-                                <a href="{{ route('clients.edit', $client) }}"
+                                <a href="{{ route('clients.projects.edit', [$client, $project]) }}"
                                     class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-1">
                                     {{ __('Edit') }}
                                 </a>
-                                <form action="{{ route('clients.destroy', $client) }}" method="POST"
-                                    class="inline-block">
+                                <form action="{{ route('clients.projects.destroy', [$client, $project]) }}"
+                                    method="POST" class="inline-block">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"

@@ -37,8 +37,7 @@
                 </div>
                 <div class="flex flex-col mb-1">
                     <x-label for="address" :value="__('Address')" />
-                    <textarea name="address" id="address"
-                        class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'">{{ old('address') }}</textarea>
+                    <x-textarea name="address" id="address" :value="old('address')" />
                     @error('address')
                         <p class="text-red-500 text-xs italic">{{ $message }}</p>
                     @enderror

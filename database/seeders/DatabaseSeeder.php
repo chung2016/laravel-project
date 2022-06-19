@@ -8,6 +8,8 @@ use Database\Seeders\UserSeeder;
 use Database\Seeders\RoleSeeder;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\ClientSeeder;
+use Database\Seeders\ProjectSeeder;
+use Database\Seeders\TaskSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,6 +25,8 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             ClientSeeder::class,
+            // ProjectSeeder::class,
+            // TaskSeeder::class,
         ]);
     }
 }
