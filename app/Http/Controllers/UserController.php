@@ -19,7 +19,7 @@ class UserController extends Controller
 
     public function create(): View
     {
-        $roles = Role::all();
+        $roles = Role::pluck('name', 'id');
         return view('users.create', compact('roles'));
     }
 
@@ -32,7 +32,7 @@ class UserController extends Controller
 
     public function edit(User $user): View
     {
-        $roles = Role::all();
+        $roles = Role::pluck('name', 'id');
         return view('users.edit', compact('user', 'roles'));
     }
 

@@ -35,9 +35,9 @@
                     <select name="role" id="role"
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('role') border-red-500 @enderror">
                         <option value="">Select Role</option>
-                        @foreach ($roles as $role)
-                            <option value="{{ $role->id }}" {{ $user->hasRole($role->name) ? 'selected' : '' }}>
-                                {{ $role->name }}</option>
+                        @foreach ($roles as $id => $name)
+                            <option value="{{ $id }}" {{ $user->hasRole($name) ? 'selected' : '' }}>
+                                {{ $name }}</option>
                         @endforeach
                     </select>
                     @error('role')
