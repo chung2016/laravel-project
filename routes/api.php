@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', [AuthController::class, 'me']);
     Route::apiResource('users', UserController::class)->only('index');
-    Route::apiResource('clients', ClientController::class)->only('index');
+    Route::apiResource('clients', ClientController::class)->only(['index', 'show']);
 });
 
 Route::post('register', [AuthController::class, 'register']);

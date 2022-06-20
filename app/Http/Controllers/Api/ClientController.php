@@ -49,7 +49,8 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        //
+        $client = Client::findOrFail($id);
+        return new ClientCollection($client);
     }
 
     /**
