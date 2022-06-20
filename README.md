@@ -33,7 +33,7 @@
 - [X] API Routes and Controllers
 - [X] API Eloquent Resources
 - [X] API Auth with Sanctum
-- [] Override API Error Handling and Status Codes
+- [X] Override API Error Handling and Status Codes
 
 ### Debugging Errors
 
