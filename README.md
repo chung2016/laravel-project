@@ -17,11 +17,11 @@
 
 ### Database Advanced
 
-- [ ] Database Seeders and Factories - to automatically create first clients/projects/tasks and default users
+- [X] Database Seeders and Factories - to automatically create first clients/projects/tasks and default users
 - [ ] Eloquent Query Scopes - show only active clients, for example
 - [ ] Polymorphic relationships with Spatie Media Library package
 - [ ] Eloquent Accessors and Mutators - view all date values in m/d/Y format
-- [ ] Soft Deletes on any Eloquent models
+- [X] Soft Deletes on any Eloquent models
 
 ### Auth Advanced
 
@@ -30,9 +30,9 @@
 
 ### API Basics
 
-- [ ] API Routes and Controllers
-- [ ] API Eloquent Resources
-- [ ] API Auth with Sanctum
+- [X] API Routes and Controllers
+- [X] API Eloquent Resources
+- [X] API Auth with Sanctum
 - [ ] Override API Error Handling and Status Codes
 
 ### Debugging Errors
