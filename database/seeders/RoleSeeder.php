@@ -15,9 +15,21 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        $admin = Role::create(['name' => 'admin']);
-        $simpleUser = Role::create(['name' => 'simple user']);
-        
-        $admin->givePermissionTo('manage users');
+        $roles = ['admin', 'user'];
+        $actions = ['view', 'create', 'edit', 'delete'];
+        $models = ['users', 'clients', 'projects', 'tasks'];
+        foreach ($roles as $role) {
+            $roleModel = Role::create([
+                'name' => $role,
+            ]);
+            foreach ($actions as $action) {
+                foreach ($models as $model) {
+                    if ($role == 'user' && $model == 'users') {
+                        continue;
+                    }
+                    $roleModel->givePermissionTo($action . ' ' . $model);
+                }
+            }
+        }
     }
 }

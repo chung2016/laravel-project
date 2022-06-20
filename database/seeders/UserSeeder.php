@@ -18,8 +18,13 @@ class UserSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@example.com',
         ]);
+        $user = \App\Models\User::factory()->create([
+            'name' => 'User',
+            'email' => 'user@example.com',
+        ]);
 
         \App\Models\User::factory(10)->create();
         $admin->syncRoles(['admin']);
+        $user->syncRoles(['user']);
     }
 }

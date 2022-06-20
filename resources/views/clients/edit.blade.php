@@ -4,10 +4,12 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Edit Client') }}
             </h2>
-            <a href="{{ route('clients.index') }}"
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-1">
-                {{ __('Back to list') }}
-            </a>
+            @can('view clients')
+                <a href="{{ route('clients.index') }}"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-1">
+                    {{ __('Back to list') }}
+                </a>
+            @endcan
         </div>
     </x-slot>
     <div class="p-2">

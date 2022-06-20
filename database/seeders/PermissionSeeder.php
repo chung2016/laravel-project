@@ -15,6 +15,15 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
-        Permission::create(['name' => 'manage users']);
+        $actions = ['view', 'create', 'edit', 'delete'];
+        $models = ['users', 'clients', 'projects', 'tasks'];
+
+        foreach ($models as $model) {
+            foreach ($actions as $action) {
+                Permission::create([
+                    'name' => $action . ' ' . $model,
+                ]);
+            }
+        }
     }
 }

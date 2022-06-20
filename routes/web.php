@@ -26,7 +26,7 @@ Route::group([
     'middleware' => ['auth'],
 ], function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
-    Route::resource('users', UserController::class)->except(['show'])->middleware('can:manage users');
+    Route::resource('users', UserController::class)->except(['show']);
     Route::resource('clients', ClientController::class)->except(['show']);
     Route::resource('clients.projects', ProjectController::class)->except(['show']);
     Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');

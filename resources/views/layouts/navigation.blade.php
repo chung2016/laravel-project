@@ -15,14 +15,16 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    @can('manage users')
+                    @can('view users')
                         <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                             {{ __('Users') }}
                         </x-nav-link>
                     @endcan
-                    <x-nav-link :href="route('clients.index')" :active="request()->routeIs('clients.index')">
-                        {{ __('Clients') }}
-                    </x-nav-link>
+                    @can('view clients')
+                        <x-nav-link :href="route('clients.index')" :active="request()->routeIs('clients.index')">
+                            {{ __('Clients') }}
+                        </x-nav-link>
+                    @endcan
                 </div>
             </div>
 
@@ -85,7 +87,7 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            @can('manage users')
+            @can('view users')
                 <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                     {{ __('Users') }}
                 </x-responsive-nav-link>

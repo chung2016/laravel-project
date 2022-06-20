@@ -4,8 +4,10 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('All Clients') }}
             </h2>
-            <a href="{{ route('clients.create') }}"
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-1">Add New Client</a>
+            @can('create clients')
+                <a href="{{ route('clients.create') }}"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-1">Add New Client</a>
+            @endcan
         </div>
     </x-slot>
     <div class="flex flex-col">
@@ -65,23 +67,29 @@
                                 {{ $client->projects_count }}
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap">
-                                <a href="{{ route('clients.projects.index', $client) }}"
-                                    class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-1">
-                                    View Projects
-                                </a>
-                                <a href="{{ route('clients.edit', $client) }}"
-                                    class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-1">
-                                    {{ __('Edit') }}
-                                </a>
-                                <form action="{{ route('clients.destroy', $client) }}" method="POST"
-                                    class="inline-block">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mx-1">
-                                        {{ __('Delete') }}
-                                    </button>
-                                </form>
+                                @can('view projects')
+                                    <a href="{{ route('clients.projects.index', $client) }}"
+                                        class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-1">
+                                        View Projects
+                                    </a>
+                                @endcan
+                                @can('edit clients')
+                                    <a href="{{ route('clients.edit', $client) }}"
+                                        class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-1">
+                                        Edit
+                                    </a>
+                                @endcan
+                                @can('delete clients')
+                                    <form action="{{ route('clients.destroy', $client) }}" method="POST"
+                                        class="inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mx-1">
+                                            {{ __('Delete') }}
+                                        </button>
+                                    </form>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

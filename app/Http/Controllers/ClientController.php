@@ -12,39 +12,40 @@ class ClientController extends Controller
 {
     public function index(): View
     {
+        $this->authorize('view', Client::class);
         $clients = Client::withCount('projects')->get();
         return view('clients.index', compact('clients'));
     }
 
     public function create(): View
     {
+        $this->authorize('create', Client::class);
         return view('clients.create');
     }
 
     public function store(StoreClientRequest $request): RedirectResponse
     {
+        $this->authorize('create', Client::class);
         Client::create([$request->validated(), 'user_id' => auth()->user()->id]);
         return redirect()->route('clients.index')->with('success', 'Client created successfully');
     }
 
-    public function show(Client $client): View
-    {
-        return view('clients.show', compact('client'));
-    }
-
     public function edit(Client $client): View
     {
+        $this->authorize('update', $client);
         return view('clients.edit', compact('client'));
     }
 
     public function update(UpdateClientRequest $request, Client $client): RedirectResponse
     {
+        $this->authorize('update', $client);
         $client->update($request->validated());
         return redirect()->route('clients.index')->with('success', 'Client updated successfully');
     }
 
     public function destroy(Client $client): RedirectResponse
     {
+        $this->authorize('delete', $client);
         $client->delete();
         return redirect()->route('clients.index')->with('success', 'Client deleted successfully');
     }

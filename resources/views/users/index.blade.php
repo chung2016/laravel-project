@@ -4,8 +4,10 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('All Users') }}
             </h2>
-            <a href="{{ route('users.create') }}"
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-1">Add New User</a>
+            @can('create users')
+                <a href="{{ route('users.create') }}"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-1">Add New User</a>
+            @endcan
         </div>
     </x-slot>
     <div class="flex flex-col">
@@ -53,19 +55,18 @@
                                 {{ $user->clients_count }}
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap">
-                                <a href="{{ route('users.edit', $user) }}"
-                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-1">
-                                    {{ __('Edit') }}
-                                </a>
-                                <form action="{{ route('users.destroy', $user) }}" method="POST"
-                                    class="inline-block">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mx-1">
-                                        {{ __('Delete') }}
-                                    </button>
-                                </form>
+                                @can('edit users')
+                                    <a href="{{ route('users.edit', $user) }}"
+                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-1">Edit</a>
+                                @endcan
+                                @can('delete users')
+                                    <form action="{{ route('users.destroy', $user) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded m-1">Delete</button>
+                                    </form>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

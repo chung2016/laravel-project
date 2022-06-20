@@ -10,85 +10,23 @@ class ClientPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Determine whether the user can view any models.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function viewAny(User $user)
+    public function view(): bool
     {
-        //
+        return auth()->user()->hasPermissionTo('view clients');
     }
 
-    /**
-     * Determine whether the user can view the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Client  $client
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function view(User $user, Client $client)
+    public function create(User $user): bool
     {
-        //
+        return $user->hasPermissionTo('create clients');
     }
 
-    /**
-     * Determine whether the user can create models.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function create(User $user)
+    public function update(User $user, Client $client): bool
     {
-        //
+        return $user->hasPermissionTo('edit clients');
     }
 
-    /**
-     * Determine whether the user can update the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Client  $client
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function update(User $user, Client $client)
+    public function delete(User $user, Client $client): bool
     {
-        //
-    }
-
-    /**
-     * Determine whether the user can delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Client  $client
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function delete(User $user, Client $client)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Client  $client
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(User $user, Client $client)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Client  $client
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(User $user, Client $client)
-    {
-        //
+        return $user->hasPermissionTo('delete clients');
     }
 }
