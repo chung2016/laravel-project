@@ -5,7 +5,7 @@
                 {{ __('Client') . ' Name: ' . $client->name . ' | ' . __('All Projects') }}
             </h2>
             @can('create projects')
-                <a href="{{ route('projects.create', ['client' => $client->id]) }}"
+                <a href="{{ route('clients.projects.create', ['client' => $client->id]) }}"
                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-1">Add New Project</a>
             @endcan
         </div>
