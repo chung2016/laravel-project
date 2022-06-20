@@ -32,6 +32,9 @@
                             Clients
                         </th>
                         <th scope="col" class="text-sm font-medium text-white px-6 py-4">
+                            {{ __('Created At') }}
+                        </th>
+                        <th scope="col" class="text-sm font-medium text-white px-6 py-4">
                             Actions
                         </th>
                     </tr>
@@ -53,6 +56,9 @@
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap">
                                 {{ $user->clients_count }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-no-wrap">
+                                {{ $user->created_at->format('m/d/Y') }}
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap">
                                 @can('edit users')
