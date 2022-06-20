@@ -29,6 +29,7 @@ class StoreClientRequest extends FormRequest
             'phone' => 'required|string|max:255',
             'company_name' => 'nullable|string|max:255',
             'address' => 'nullable|string|max:255',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 }

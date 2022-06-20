@@ -23,14 +23,17 @@
                             {{ __('Name') }}
                         </th>
                         <th scope="col" class="text-sm font-medium text-white px-6 py-4">
+                            avatar
+                        </th>
+                        <th scope="col" class="text-sm font-medium text-white px-6 py-4">
                             Email
                         </th>
                         <th scope="col" class="text-sm font-medium text-white px-6 py-4">
                             Phone
                         </th>
-                        <th scope="col" class="text-sm font-medium text-white px-6 py-4">
+                        {{-- <th scope="col" class="text-sm font-medium text-white px-6 py-4">
                             Address
-                        </th>
+                        </th> --}}
                         <th scope="col" class="text-sm font-medium text-white px-6 py-4">
                             Company Name
                         </th>
@@ -52,14 +55,17 @@
                                 {{ $client->name }}
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap">
+                                <img src="{{$client->getFirstMediaUrl('avatar')}}" width="120px">
+                            </td>
+                            <td class="px-6 py-4 whitespace-no-wrap">
                                 {{ $client->email }}
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap">
                                 {{ $client->phone }}
                             </td>
-                            <td class="px-6 py-4 whitespace-no-wrap">
+                            {{-- <td class="px-6 py-4 whitespace-no-wrap">
                                 {{ $client->address }}
-                            </td>
+                            </td> --}}
                             <td class="px-6 py-4 whitespace-no-wrap">
                                 {{ $client->company_name }}
                             </td>

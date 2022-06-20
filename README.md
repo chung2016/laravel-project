@@ -19,7 +19,7 @@
 
 - [X] Database Seeders and Factories - to automatically create first clients/projects/tasks and default users
 - [ ] Eloquent Query Scopes - show only active clients, for example
-- [ ] Polymorphic relationships with Spatie Media Library package
+- [X] Polymorphic relationships with Spatie Media Library package
 - [X] Eloquent Accessors and Mutators - view all date values in m/d/Y format
 - [X] Soft Deletes on any Eloquent models
 

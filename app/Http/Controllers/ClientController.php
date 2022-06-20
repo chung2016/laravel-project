@@ -26,7 +26,11 @@ class ClientController extends Controller
     public function store(StoreClientRequest $request): RedirectResponse
     {
         $this->authorize('create', Client::class);
-        Client::create([$request->validated(), 'user_id' => auth()->user()->id]);
+
+        $client = Client::create($request->validated() + ['user_id' => auth()->id()]);
+        if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
+            $client->addMediaFromRequest('avatar')->toMediaCollection('avatar');
+        }
         return redirect()->route('clients.index')->with('success', 'Client created successfully');
     }
 

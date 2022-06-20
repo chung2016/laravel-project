@@ -14,12 +14,19 @@
     </x-slot>
     <div class="p-2">
         <div class="flex flex-col">
-            <form action="{{ route('clients.store') }}" method="POST">
+            <form action="{{ route('clients.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="flex flex-col mb-1">
                     <x-label for="name" :value="__('Name')" />
                     <x-input name="name" :value="old('name')" id="name" />
                     @error('name')
+                        <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="flex flex-col mb-1">
+                    <x-label for="avatar" :value="__('Avatar')" />
+                    <input type="file" name="avatar">
+                    @error('avatar')
                         <p class="text-red-500 text-xs italic">{{ $message }}</p>
                     @enderror
                 </div>
