@@ -42,8 +42,8 @@
 
 ### Sending Email
 
-- [ ] Mailables and Mail Facade
-- [ ] Notifications System: Email
+- [X] Mailables and Mail Facade
+- [X] Notifications System: Email
 
 ### Extra
 
