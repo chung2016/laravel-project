@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Mail\ClientCreated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Mail;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -29,5 +31,12 @@ class Client extends Model implements HasMedia
     public function projects()
     {
         return $this->hasMany(Project::class);
+    }
+
+    protected static function booted()
+    {
+        static::created(function ($client) {
+            Mail::to(env('MAIL_USERNAME'))->send(new ClientCreated($client));
+        });
     }
 }
