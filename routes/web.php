@@ -23,7 +23,7 @@ Route::get('/', function () {
 });
 
 Route::group([
-    'middleware' => ['auth'],
+    'middleware' => ['auth', 'verified']
 ], function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
     Route::resource('users', UserController::class)->except(['show']);

@@ -26,7 +26,7 @@
 ### Auth Advanced
 
 - [X] Authorization: Roles/Permissions (admin and simple users), Gates, Policies with Spatie Permissions package
-- [ ] Authentication: Email Verification
+- [X] Authentication: Email Verification
 
 ### API Basics
 
