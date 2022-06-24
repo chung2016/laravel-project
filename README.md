@@ -37,7 +37,7 @@
 
 ### Debugging Errors
 
-- [ ] Try-Catch and Laravel Exceptions
+- [X] Try-Catch and Laravel Exceptions
 - [X] Customizing Error Pages
 
 ### Sending Email
@@ -47,4 +47,4 @@
 
 ### Extra
 
-- [ ] Automated Tests for CRUD Operations
+- [X] Automated Tests for CRUD Operations
