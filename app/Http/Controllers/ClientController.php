@@ -7,13 +7,19 @@ use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
+        if ($request->get('archive')) {
+            $clients = Client::withCount('projects')->onlyTrashed()->get();
+        } else {
+            $clients = Client::withCount('projects')->get();
+        }
+
         $this->authorize('view', Client::class);
-        $clients = Client::withCount('projects')->get();
         return view('clients.index', compact('clients'));
     }
 
@@ -52,5 +58,19 @@ class ClientController extends Controller
         $this->authorize('delete', $client);
         $client->delete();
         return redirect()->route('clients.index')->with('success', 'Client deleted successfully');
+    }
+
+    public function restore($id): RedirectResponse
+    {
+        $client = Client::onlyTrashed()->findOrFail($id);
+        $client->restore();
+        return redirect()->route('clients.index', ['archive' => 1])->with('success', 'Client restored successfully');
+    }
+
+    public function forceDelete($id): RedirectResponse
+    {
+        $client = Client::onlyTrashed()->findOrFail($id);
+        $client->forceDelete();
+        return redirect()->route('clients.index', ['archive' => 1])->with('success', 'Client deleted successfully');
     }
 }

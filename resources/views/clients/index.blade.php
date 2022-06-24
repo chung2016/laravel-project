@@ -4,6 +4,17 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('All Clients') }}
             </h2>
+            @if (request()->get('archive'))
+                <a href="{{ route('clients.index') }}"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-1">
+                    {{ __('View Active Clients') }}
+                </a>
+            @else
+                <a href="{{ route('clients.index', ['archive' => 1]) }}"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-1">
+                    {{ __('View Archive Clients') }}
+                </a>
+            @endif
             @can('create clients')
                 <a href="{{ route('clients.create') }}"
                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-1">Add New Client</a>
@@ -55,7 +66,7 @@
                                 {{ $client->name }}
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap">
-                                <img src="{{$client->getFirstMediaUrl('avatar')}}" width="120px">
+                                <img src="{{ $client->getFirstMediaUrl('avatar') }}" width="120px">
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap">
                                 {{ $client->email }}
@@ -73,29 +84,49 @@
                                 {{ $client->projects_count }}
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap">
-                                @can('view projects')
-                                    <a href="{{ route('clients.projects.index', $client) }}"
-                                        class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-1">
-                                        View Projects
-                                    </a>
-                                @endcan
-                                @can('edit clients')
-                                    <a href="{{ route('clients.edit', $client) }}"
-                                        class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-1">
-                                        Edit
-                                    </a>
-                                @endcan
-                                @can('delete clients')
-                                    <form action="{{ route('clients.destroy', $client) }}" method="POST"
+                                @if (request()->get('archive'))
+                                    <form action="{{ route('clients.restore', $client->id) }}" method="POST"
+                                        class="inline-block">
+                                        @csrf
+                                        <button type="submit"
+                                            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mx-1">
+                                            {{ __('Restore') }}
+                                        </button>
+                                    </form>
+                                    <form action="{{ route('clients.forceDelete', $client->id) }}" method="POST"
                                         class="inline-block">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
                                             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mx-1">
-                                            {{ __('Delete') }}
+                                            {{ __('Force Delete') }}
                                         </button>
                                     </form>
-                                @endcan
+                                @else
+                                    @can('view projects')
+                                        <a href="{{ route('clients.projects.index', $client) }}"
+                                            class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-1">
+                                            View Projects
+                                        </a>
+                                    @endcan
+                                    @can('edit clients')
+                                        <a href="{{ route('clients.edit', $client) }}"
+                                            class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-1">
+                                            Edit
+                                        </a>
+                                    @endcan
+                                    @can('delete clients')
+                                        <form action="{{ route('clients.destroy', $client) }}" method="POST"
+                                            class="inline-block">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mx-1">
+                                                {{ __('Delete') }}
+                                            </button>
+                                        </form>
+                                    @endcan
+                                @endif
                             </td>
                         </tr>
                     @endforeach

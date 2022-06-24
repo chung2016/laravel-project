@@ -28,6 +28,8 @@ Route::group([
     Route::view('dashboard', 'dashboard')->name('dashboard');
     Route::resource('users', UserController::class)->except(['show']);
     Route::resource('clients', ClientController::class)->except(['show']);
+    Route::post('clients/{id}/restore', [ClientController::class, 'restore'])->name('clients.restore');
+    Route::delete('clients/{id}/force-delete', [ClientController::class, 'forceDelete'])->name('clients.forceDelete');
     Route::resource('clients.projects', ProjectController::class)->except(['show']);
     Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::post('profile', [ProfileController::class, 'update'])->name('profile.update');
